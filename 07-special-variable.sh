@@ -2,10 +2,12 @@
 
 # Display special shell variables
 
+echo "All variables passed to the script: $@"
+echo "All variables passed to the script: $*"
 echo "Script name: $0"
-echo "Number of arguments: $#"
-echo "All arguments (as single word): $*"
-echo "All arguments (as separate words): $@"
-echo "Process ID: $$"
-echo "Last background process ID: $!"
-echo "Exit status of last command: $?"
+echo "Current directory: $PWD"
+echo "Who is running this: $USER"
+echo "Home directory of user: $HOME"
+echo "PID of this script: $$"
+sleep 50 &
+echo "PID of the last command in background is: $!"
