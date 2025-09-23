@@ -1,15 +1,16 @@
 #!/bin/bash
+USERID=$(id -u)
 
-set -e
+if [ $USERID -ne 0 ]; then
+    echo "ERROR:: Please run this script with root privelege"
+    exit 1 # failure is other than 0
+fi
 
-echo "Updating package information..."
-sudo apt-get update
+dnf install mysql -y
 
-echo "Installing MySQL Server..."
-sudo apt-get install -y mysql-server
-
-echo "Enabling and starting MySQL service..."
-sudo systemctl enable mysql
-sudo systemctl start mysql
-
-echo "MySQL installation completed."
+if [ $? -ne 0 ]; then
+    echo "ERROR:: Installing MySQL is failure"
+    exit 1
+else
+    echo "Installing MySQL is SUCCESS"
+fi
